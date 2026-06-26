@@ -122,6 +122,19 @@ const translations = {
     toast_deleted: "Product deleted.",
     toast_error: "Something went wrong.",
 
+    // Wishlist
+    nav_wishlist: "Wishlist",
+    wishlist_title: "My Wishlist",
+    wishlist_sub: "Your saved carpet favourites",
+    wishlist_item: "carpet saved",
+    wishlist_items: "carpets saved",
+    wishlist_share_btn: "Share Wishlist on WhatsApp",
+    wishlist_clear: "Clear All",
+    wishlist_confirm_clear: "Remove all items from your wishlist?",
+    wishlist_empty_title: "Your wishlist is empty",
+    wishlist_empty_sub: "Tap the heart on any carpet to save it here",
+    wishlist_browse: "Browse Catalog",
+
     // WhatsApp
     wa_float_msg: "Hi, I'd like to browse your carpet collection",
     wa_product_msg: "Hi, I'm interested in",
@@ -246,6 +259,19 @@ const translations = {
     toast_updated: "تم تحديث المنتج!",
     toast_deleted: "تم حذف المنتج.",
     toast_error: "حدث خطأ ما.",
+
+    // Wishlist
+    nav_wishlist: "المفضلة",
+    wishlist_title: "قائمة المفضلة",
+    wishlist_sub: "السجاد المحفوظ المفضل لديك",
+    wishlist_item: "سجادة محفوظة",
+    wishlist_items: "سجاد محفوظ",
+    wishlist_share_btn: "شارك القائمة عبر واتساب",
+    wishlist_clear: "مسح الكل",
+    wishlist_confirm_clear: "هل تريد إزالة جميع العناصر من مفضلتك؟",
+    wishlist_empty_title: "قائمة المفضلة فارغة",
+    wishlist_empty_sub: "اضغط على القلب على أي سجادة لحفظها هنا",
+    wishlist_browse: "تصفح الكتالوج",
 
     wa_float_msg: "مرحبا، أريد تصفح مجموعة السجاد",
     wa_product_msg: "مرحبا، أنا مهتم بـ",

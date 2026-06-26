@@ -1,4 +1,5 @@
 import { LangSystem } from './lang.js';
+import { Wishlist } from './wishlist.js';
 
 // ── WhatsApp number (change this one value to update everywhere) ──
 const WA_NUMBER = '201000000000';
@@ -25,6 +26,8 @@ export function buildNavbar(activePage) {
   const nav = document.getElementById('navbar');
   if (!nav) return;
 
+  const wCount = Wishlist.count();
+
   nav.innerHTML = `
     <div class="navbar-brand">
       <div class="brand-logo">
@@ -42,6 +45,12 @@ export function buildNavbar(activePage) {
     </nav>
 
     <div class="nav-actions">
+      <a href="/wishlist.html" class="nav-wishlist-btn ${activePage === 'wishlist' ? 'active' : ''}" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" fill="${activePage === 'wishlist' ? 'var(--gold)' : 'none'}" stroke="currentColor" stroke-width="1.8">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        ${wCount > 0 ? `<span class="wishlist-count">${wCount}</span>` : ''}
+      </a>
       <div class="lang-toggle">
         <button class="lang-btn ${lang === 'en' ? 'active' : ''}" data-lang-btn="en">EN</button>
         <button class="lang-btn ${lang === 'ar' ? 'active' : ''}" data-lang-btn="ar">AR</button>
@@ -59,6 +68,7 @@ export function buildNavbar(activePage) {
       <ul class="nav-links">
         <li><a href="/" data-lang-key="nav_home">Home</a></li>
         <li><a href="/catalog.html" data-lang-key="nav_catalog">Catalog</a></li>
+        <li><a href="/wishlist.html" data-lang-key="nav_wishlist">Wishlist${wCount > 0 ? ` (${wCount})` : ''}</a></li>
         <li><a href="mailto:contact@maisontapis.com" data-lang-key="nav_contact">Contact</a></li>
       </ul>
       <div class="lang-toggle">
@@ -145,10 +155,11 @@ export function buildWhatsAppFloat() {
 }
 
 // ── Product card builder ──
-export function buildProductCard(product, showAr = false) {
+export function buildProductCard(product) {
   const name = LangSystem.current === 'ar' ? product.nameAr : product.nameEn;
   const nameSecondary = LangSystem.current === 'ar' ? product.nameEn : product.nameAr;
   const defaultSize = product.sizes?.[0] || '';
+  const isWishlisted = Wishlist.has(product.id);
 
   return `
     <div class="product-card" onclick="window.location.href='/product.html?id=${product.id}'">
@@ -160,6 +171,16 @@ export function buildProductCard(product, showAr = false) {
         <div class="carpet-placeholder" ${product.image ? 'style="display:none"' : ''}>🪅</div>
         <span class="card-ref">${product.ref}</span>
         ${product.featured ? `<span class="card-badge">Featured</span>` : ''}
+        <button
+          class="heart-btn ${isWishlisted ? 'active' : ''}"
+          data-product-id="${product.id}"
+          aria-label="Save to wishlist"
+          onclick="event.stopPropagation(); window.__toggleWishlist(${product.id}, this)"
+        >
+          <svg viewBox="0 0 24 24" fill="${isWishlisted ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </button>
       </div>
       <div class="card-body">
         <div class="card-meta">
@@ -181,6 +202,34 @@ export function buildProductCard(product, showAr = false) {
     </div>
   `;
 }
+
+// ── Global wishlist toggle handler (called from card buttons) ──
+window.__toggleWishlist = function(id, btn) {
+  const added = Wishlist.toggle(id);
+  const svg = btn.querySelector('svg');
+  btn.classList.toggle('active', added);
+  if (svg) svg.setAttribute('fill', added ? 'currentColor' : 'none');
+
+  // Update navbar count badge
+  const badge = document.querySelector('.nav-wishlist-btn .wishlist-count');
+  const navBtn = document.querySelector('.nav-wishlist-btn');
+  const count = Wishlist.count();
+  if (navBtn) {
+    let existingBadge = navBtn.querySelector('.wishlist-count');
+    if (count > 0) {
+      if (existingBadge) {
+        existingBadge.textContent = count;
+      } else {
+        const span = document.createElement('span');
+        span.className = 'wishlist-count';
+        span.textContent = count;
+        navBtn.appendChild(span);
+      }
+    } else if (existingBadge) {
+      existingBadge.remove();
+    }
+  }
+};
 
 // ── Fetch products ──
 export async function fetchProducts() {

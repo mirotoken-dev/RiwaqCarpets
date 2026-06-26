@@ -28,6 +28,7 @@ export default defineConfig({
         catalog: path.resolve(import.meta.dirname, "catalog.html"),
         product: path.resolve(import.meta.dirname, "product.html"),
         admin: path.resolve(import.meta.dirname, "admin.html"),
+        wishlist: path.resolve(import.meta.dirname, "wishlist.html"),
       },
     },
   },
