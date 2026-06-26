@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — MaisonTapis</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪅</text></svg>" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="admin-lock" class="admin-lock">
+  <div class="admin-lock-card">
+    <div class="brand-logo" style="margin:0 auto 1.5rem;width:56px;height:56px;background:var(--charcoal);border-radius:50%;display:flex;align-items:center;justify-content:center">
+      <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:var(--gold)"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <h2 data-lang-key="admin_title">Admin Panel</h2>
+    <p data-lang-key="admin_enter_password">Enter your admin password to continue</p>
+    <div class="form-group">
+      <label class="form-label" data-lang-key="admin_password_label">Password</label>
+      <input type="password" id="admin-pw-input" class="form-input" placeholder="••••••••" autocomplete="current-password" />
+      <p class="admin-error" id="admin-error" data-lang-key="admin_wrong_password">Incorrect password. Please try again.</p>
+    </div>
+    <button class="btn-primary btn-full" id="admin-login-btn" data-lang-key="admin_login_btn">Login</button>
+    <div style="margin-top:1.25rem;display:flex;justify-content:center;gap:.5rem">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang-btn="en">EN</button>
+        <button class="lang-btn" data-lang-btn="ar">AR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin-body" class="admin-body">
+
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar-header">
+      <div class="brand-name" style="font-family:'Playfair Display',serif;color:var(--white)">Maison<span style="color:var(--gold)">Tapis</span></div>
+      <small>Admin Panel</small>
+    </div>
+    <nav class="admin-nav">
+      <div class="admin-nav-item active" data-section="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span data-lang-key="admin_dashboard">Dashboard</span>
+      </div>
+      <div class="admin-nav-item" data-section="add-product">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        <span data-lang-key="admin_add_product">Add Product</span>
+      </div>
+      <div class="admin-nav-item" data-section="all-products">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span data-lang-key="admin_all_products">All Products</span>
+      </div>
+    </nav>
+    <div class="admin-logout-btn" id="admin-logout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span data-lang-key="admin_logout">Logout</span>
+    </div>
+  </aside>
+
+  <main class="admin-content">
+    <div class="admin-topbar">
+      <h2 id="admin-section-title">Dashboard</h2>
+      <a href="/" style="font-size:.8rem;color:var(--text-light)">← Back to Store</a>
+    </div>
+
+    <!-- DASHBOARD SECTION -->
+    <div class="admin-section active" id="section-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label" data-lang-key="admin_total_products">Total Products</div>
+          <div class="stat-value"><span id="stat-total">0</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label" data-lang-key="admin_visible_products">Visible</div>
+          <div class="stat-value" style="color:var(--whatsapp)"><span id="stat-visible">0</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label" data-lang-key="admin_hidden_products">Hidden</div>
+          <div class="stat-value" style="color:#e53e3e"><span id="stat-hidden">0</span></div>
+        </div>
+      </div>
+      <div class="admin-card">
+        <p style="font-size:.9rem;color:var(--text-light);line-height:1.8">
+          Welcome to the MaisonTapis Admin Panel. Use the sidebar to add, edit, or remove products. Changes are saved in your browser storage and reflected immediately on the store.<br><br>
+          <strong>Note:</strong> To update the WhatsApp number, open <code>src/app.js</code> and change the <code>WA_NUMBER</code> constant at the top.
+        </p>
+      </div>
+    </div>
+
+    <!-- ADD / EDIT PRODUCT SECTION -->
+    <div class="admin-section" id="section-add-product">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 id="form-title" data-lang-key="admin_add_product">Add Product</h3>
+        </div>
+        <form id="product-form" class="admin-form" novalidate>
+          <input type="hidden" id="edit-id" value="" />
+
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_name_en">Product Name (English)</label>
+            <input type="text" id="f-name-en" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_name_ar">Product Name (Arabic)</label>
+            <input type="text" id="f-name-ar" class="form-input" dir="rtl" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_ref">Ref Number</label>
+            <input type="text" id="f-ref" class="form-input" placeholder="e.g. CP-009" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_price">Price (USD)</label>
+            <input type="number" id="f-price" class="form-input" min="0" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_color">Color (hex)</label>
+            <input type="color" id="f-color" class="form-input" style="height:42px;padding:4px 8px;cursor:pointer" value="#C9A84C" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_color_name">Color Name (EN)</label>
+            <input type="text" id="f-color-name" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_color_name_ar">Color Name (AR)</label>
+            <input type="text" id="f-color-name-ar" class="form-input" dir="rtl" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_material">Material (EN)</label>
+            <input type="text" id="f-material" class="form-input" placeholder="e.g. Pure Wool" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_material_ar">Material (AR)</label>
+            <input type="text" id="f-material-ar" class="form-input" dir="rtl" placeholder="صوف خالص" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_style">Style</label>
+            <select id="f-style" class="form-select">
+              <option value="Modern">Modern</option>
+              <option value="Classic">Classic</option>
+              <option value="Oriental">Oriental</option>
+              <option value="Geometric">Geometric</option>
+            </select>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label class="form-label" data-lang-key="admin_form_sizes">Sizes</label>
+            <div class="sizes-input-wrap" id="sizes-chips"></div>
+            <div class="add-size-row">
+              <input type="text" id="f-size-input" class="form-input" placeholder="e.g. 160x230" data-lang-key="admin_form_add_size" />
+              <button type="button" class="btn-gold-outline" id="add-size-btn" data-lang-key="admin_form_add">Add</button>
+            </div>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label class="form-label" data-lang-key="admin_form_image">Image URL or path</label>
+            <input type="text" id="f-image" class="form-input" placeholder="/images/carpet-9.jpg" />
+          </div>
+
+          <div class="form-group form-group-full">
+            <label class="form-label" data-lang-key="admin_form_desc">Description (English)</label>
+            <textarea id="f-desc" class="form-textarea"></textarea>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label class="form-label" data-lang-key="admin_form_desc_ar">Description (Arabic)</label>
+            <textarea id="f-desc-ar" class="form-textarea" dir="rtl"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_visible">Visible on store</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="f-visible" checked />
+              <span class="toggle-slider"></span>
+              <span style="font-size:.85rem;color:var(--text)">Visible</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-lang-key="admin_form_featured">Featured on homepage</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="f-featured" />
+              <span class="toggle-slider"></span>
+              <span style="font-size:.85rem;color:var(--text)">Featured</span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" id="form-cancel-btn" data-lang-key="admin_form_cancel">Cancel</button>
+            <button type="submit" class="btn-primary" id="form-submit-btn" data-lang-key="admin_form_save">Save Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ALL PRODUCTS SECTION -->
+    <div class="admin-section" id="section-all-products">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <h3 data-lang-key="admin_all_products">All Products</h3>
+          <button class="btn-gold-outline" data-section="add-product" id="goto-add-btn" data-lang-key="admin_add_product">+ Add Product</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="products-table">
+            <thead>
+              <tr>
+                <th data-lang-key="admin_table_image">Image</th>
+                <th data-lang-key="admin_table_ref">Ref</th>
+                <th data-lang-key="admin_table_name">Name</th>
+                <th data-lang-key="admin_table_price">Price</th>
+                <th data-lang-key="admin_table_style">Style</th>
+                <th data-lang-key="admin_table_visible">Visible</th>
+                <th data-lang-key="admin_table_actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script type="module" src="/src/admin.js"></script>
+</body>
+</html>
