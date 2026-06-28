@@ -19,7 +19,11 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 body {
   font-family: 'Inter', sans-serif;
@@ -27,6 +31,8 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
 }
 
 body[dir="rtl"] { font-family: 'Inter', 'Segoe UI', Tahoma, sans-serif; }
@@ -873,6 +879,7 @@ body[dir="rtl"] .toast.error { border-right: 4px solid #e53e3e; }
 }
 
 @media (max-width: 768px) {
+  .nav-links-desktop { display: none; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .hero { min-height: 80vh; }
@@ -882,6 +889,22 @@ body[dir="rtl"] .toast.error { border-right: 4px solid #e53e3e; }
   .admin-sidebar { width: 220px; }
   .admin-content { margin-left: 0; padding: 1rem; margin-top: 64px; }
   .stats-grid { grid-template-columns: 1fr; }
+
+  /* Navbar: don't let actions overflow */
+  .navbar {
+    padding: 0 1rem;
+    gap: 0.5rem;
+  }
+  .nav-actions { gap: 0.5rem; }
+  .lang-toggle { font-size: 0.65rem; }
+  .lang-btn { padding: 0.3rem 0.65rem; }
+
+  /* Prevent wide sections from creating horizontal scroll */
+  .section, .section-sm { padding: 4rem 1.25rem; }
+  .catalog-layout { padding: 2rem 1.25rem; }
+  .catalog-hero { padding: 3rem 1.25rem 2rem; }
+  .related-section { padding: 3rem 1.25rem; }
+  .wishlist-share-bar { padding: 1rem 1.25rem; }
 }
 
 @media (max-width: 480px) {
@@ -890,6 +913,17 @@ body[dir="rtl"] .toast.error { border-right: 4px solid #e53e3e; }
   .product-cta { flex-direction: column; }
   .admin-sidebar { display: none; }
   .admin-content { margin-left: 0; }
+
+  /* Keep hero text from overflowing */
+  .hero-content { padding: 1.25rem; }
+  .hero h1 { word-break: break-word; }
+
+  /* Promo banner wraps cleanly */
+  .promo-banner { padding: 0.6rem 1rem; font-size: 0.72rem; }
+
+  /* Product layout on tiny screens */
+  .product-layout { padding: 2rem 1.25rem; gap: 1.5rem; }
+  .footer-bottom { align-items: flex-start; }
 }
 
 /* RTL overrides */
