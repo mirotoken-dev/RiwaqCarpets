@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MaisonTapis — Luxury Handcrafted Carpets</title>
   <meta name="description" content="Discover the world's finest handcrafted luxury carpets. Persian, Oriental, Modern and Geometric collections. Order via WhatsApp." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="MaisonTapis — Luxury Handcrafted Carpets" />
+  <meta property="og:description" content="Discover the world's finest handcrafted luxury carpets. Order via WhatsApp with promo code SAVE10 for 10% off." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/LA639.png" />
+  <meta property="og:url" content="https://maisontapis.replit.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪅</text></svg>" />
   <link rel="stylesheet" href="/src/styles.css" />
 </head>
@@ -13,11 +20,29 @@
 <header id="navbar" class="navbar"></header>
 <div id="mobile-nav" class="mobile-nav"></div>
 
-<!-- PROMO BANNER -->
-<div class="promo-banner">
-  <span data-lang-key="promo_text">Order via WhatsApp with code</span>
-  <strong> <span class="promo-code" data-lang-key="promo_code">SAVE10</span> </strong>
-  <span data-lang-key="promo_suffix">and get 10% off your order</span>
+<!-- PROMO SLIDER -->
+<div class="promo-slider" role="region" aria-label="Promotions">
+  <button class="promo-prev" aria-label="Previous">&#8249;</button>
+
+  <div class="promo-slide">
+    🎉 <strong>Winter Sale</strong> — Buy 2 get 1 FREE on selected rugs &nbsp;|&nbsp; Code: <strong>SAVE10</strong>
+    &nbsp;<a href="/catalog.html">SHOP NOW</a>
+  </div>
+  <div class="promo-slide">
+    ✨ <strong>New Arrivals</strong> — Masonry Collection now available
+    &nbsp;<a href="/catalog.html">SHOP NOW</a>
+  </div>
+  <div class="promo-slide">
+    🚚 <strong>Worldwide Shipping</strong> — Free delivery on orders over $2,000
+    &nbsp;<a href="/catalog.html">SHOP NOW</a>
+  </div>
+
+  <button class="promo-next" aria-label="Next">&#8250;</button>
+  <div class="promo-dots">
+    <span class="promo-dot"></span>
+    <span class="promo-dot"></span>
+    <span class="promo-dot"></span>
+  </div>
 </div>
 
 <!-- HERO -->
@@ -32,11 +57,15 @@
     <p class="hero-sub" data-lang-key="hero_sub">Discover handcrafted carpets that transform spaces into timeless expressions of elegance</p>
     <a href="/catalog.html" class="btn-primary" data-lang-key="hero_cta">Explore Collection</a>
   </div>
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
 </section>
 
 <!-- FEATURED PRODUCTS -->
 <section class="section" style="background:var(--white)">
-  <div class="section-header">
+  <div class="section-header anim-fadein">
     <div class="gold-divider" style="margin-bottom:1.5rem"></div>
     <h2 data-lang-key="featured_title">Featured Collection</h2>
     <p data-lang-key="featured_sub">Handpicked masterpieces from our curated selection of luxury carpets</p>
@@ -52,30 +81,95 @@
   </div>
 </section>
 
+<!-- CATEGORY GRID -->
+<section class="section section-texture" style="background:var(--cream)">
+  <div class="section-header anim-fadein">
+    <div class="gold-divider" style="margin-bottom:1.5rem"></div>
+    <h2>Shop by Category</h2>
+    <p>Explore our collections by style and tradition</p>
+  </div>
+  <div class="category-grid">
+    <a href="/catalog.html?style=Classic" class="category-card anim-child">
+      <div class="category-card-bg" style="background:linear-gradient(135deg,#2a1a0a,#5c3d1e)"></div>
+      <div class="category-card-label">
+        <h3>Oriental &amp; Classic</h3>
+        <span>Timeless Heritage</span>
+      </div>
+    </a>
+    <a href="/catalog.html?style=Modern" class="category-card anim-child">
+      <div class="category-card-bg" style="background:linear-gradient(135deg,#0f1a2e,#1b3a6b)"></div>
+      <div class="category-card-label">
+        <h3>Geometric &amp; Modern</h3>
+        <span>Contemporary Vision</span>
+      </div>
+    </a>
+    <a href="/catalog.html?style=Tribal" class="category-card anim-child">
+      <div class="category-card-bg" style="background:linear-gradient(135deg,#3d1a0a,#8b4513)"></div>
+      <div class="category-card-label">
+        <h3>Tribal</h3>
+        <span>Ancestral Craft</span>
+      </div>
+    </a>
+    <a href="/catalog.html?style=Contemporary" class="category-card anim-child">
+      <div class="category-card-bg" style="background:linear-gradient(135deg,#1a1a1a,#3d3d3d)"></div>
+      <div class="category-card-label">
+        <h3>Contemporary</h3>
+        <span>Modern Living</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- TRUST BADGES BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item anim-child">
+      <div class="trust-icon">🔒</div>
+      <h4>Secure Payment</h4>
+      <p>All transactions protected</p>
+    </div>
+    <div class="trust-item anim-child">
+      <div class="trust-icon">🚚</div>
+      <h4>Worldwide Shipping</h4>
+      <p>Free on orders over $2,000</p>
+    </div>
+    <div class="trust-item anim-child">
+      <div class="trust-icon">↩️</div>
+      <h4>30-Day Returns</h4>
+      <p>Hassle-free return policy</p>
+    </div>
+    <div class="trust-item anim-child">
+      <div class="trust-icon">✓</div>
+      <h4>Authenticity Guaranteed</h4>
+      <p>Each piece is certified</p>
+    </div>
+  </div>
+</div>
+
 <!-- WHY US -->
 <section class="section" style="background:var(--cream)">
   <div style="max-width:1100px;margin:0 auto">
-    <div class="section-header">
+    <div class="section-header anim-fadein">
       <div class="gold-divider" style="margin-bottom:1.5rem"></div>
       <h2>Why Choose MaisonTapis</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:1rem">
-      <div style="text-align:center;padding:2rem 1rem">
+    <div class="anim-stagger" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:1rem">
+      <div class="anim-child" style="text-align:center;padding:2rem 1rem">
         <div style="font-size:2.5rem;margin-bottom:1rem">🏆</div>
         <h3 style="font-size:1.1rem;margin-bottom:.75rem;color:var(--charcoal)">Master Craftsmanship</h3>
         <p style="font-size:.85rem;color:var(--text-light);line-height:1.8">Each carpet is hand-knotted by artisans with generations of expertise passed through family traditions.</p>
       </div>
-      <div style="text-align:center;padding:2rem 1rem">
+      <div class="anim-child" style="text-align:center;padding:2rem 1rem">
         <div style="font-size:2.5rem;margin-bottom:1rem">✨</div>
         <h3 style="font-size:1.1rem;margin-bottom:.75rem;color:var(--charcoal)">Premium Materials</h3>
         <p style="font-size:.85rem;color:var(--text-light);line-height:1.8">We source only the finest New Zealand wool, Himalayan silk, and natural dyes from around the world.</p>
       </div>
-      <div style="text-align:center;padding:2rem 1rem">
+      <div class="anim-child" style="text-align:center;padding:2rem 1rem">
         <div style="font-size:2.5rem;margin-bottom:1rem">📐</div>
         <h3 style="font-size:1.1rem;margin-bottom:.75rem;color:var(--charcoal)">Custom Sizes</h3>
         <p style="font-size:.85rem;color:var(--text-light);line-height:1.8">Every carpet is available in multiple standard sizes, with custom dimensions available on request.</p>
       </div>
-      <div style="text-align:center;padding:2rem 1rem">
+      <div class="anim-child" style="text-align:center;padding:2rem 1rem">
         <div style="font-size:2.5rem;margin-bottom:1rem">💬</div>
         <h3 style="font-size:1.1rem;margin-bottom:.75rem;color:var(--charcoal)">WhatsApp Ordering</h3>
         <p style="font-size:.85rem;color:var(--text-light);line-height:1.8">Order directly via WhatsApp for a personal consultation and lock in your exclusive promo code SAVE10.</p>
@@ -84,8 +178,98 @@
   </div>
 </section>
 
+<!-- ARTISAN STORY -->
+<section style="background:var(--white)">
+  <div class="artisan-section">
+    <div class="artisan-image anim-fadein">
+      <div class="artisan-image-inner"></div>
+      <div class="artisan-image-text">✦</div>
+    </div>
+    <div class="artisan-content anim-fadein">
+      <div class="gold-divider" style="margin-bottom:1.25rem;margin-left:0;text-align:left;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+      <h2>The Art Behind Every Carpet</h2>
+      <p class="artisan-sub">Handcrafted Since 1985</p>
+      <p style="font-size:.9rem;color:var(--text-light);margin-bottom:1.5rem;line-height:1.8">Each carpet takes 3–6 months to complete by master artisans who have inherited their skills across generations.</p>
+      <ul class="artisan-bullets">
+        <li>Hand-knotted wool &amp; silk, never machine-made</li>
+        <li>Natural dyes only — no synthetic chemicals</li>
+        <li>Each piece is unique and individually numbered</li>
+      </ul>
+      <a href="/catalog.html" class="btn-secondary">Learn Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS COUNTER -->
+<section class="stats-section">
+  <div class="stats-counter-grid">
+    <div class="stat-counter-item anim-fadein">
+      <span class="stat-num" data-target="38" data-suffix="+">38+</span>
+      <span class="stat-label-text">Years of Craftsmanship</span>
+    </div>
+    <div class="stat-counter-item anim-fadein">
+      <span class="stat-num" data-target="500" data-suffix="+">500+</span>
+      <span class="stat-label-text">Carpets Sold</span>
+    </div>
+    <div class="stat-counter-item anim-fadein">
+      <span class="stat-num" data-target="12" data-suffix="">12</span>
+      <span class="stat-label-text">Countries Served</span>
+    </div>
+    <div class="stat-counter-item anim-fadein">
+      <span class="stat-num" data-target="100" data-suffix="%">100%</span>
+      <span class="stat-label-text">Handmade</span>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="section-header anim-fadein">
+    <div class="gold-divider" style="margin-bottom:1.5rem"></div>
+    <h2>What Our Customers Say</h2>
+  </div>
+  <div class="testimonial-wrapper">
+    <div class="testimonial-track">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Absolutely stunning carpet. The quality exceeded all expectations — you can truly feel the craftsmanship in every knot."</p>
+        <span class="testimonial-customer">Sarah M. — Dubai</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"The WhatsApp ordering was so easy and personal. Delivered in perfect condition with beautiful packaging."</p>
+        <span class="testimonial-customer">Ahmed K. — Cairo</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"My living room was completely transformed. The carpet is even more beautiful in person. Worth every penny."</p>
+        <span class="testimonial-customer">Layla R. — Riyadh</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Incredible craftsmanship. You can feel the quality immediately when you touch it. A true work of art."</p>
+        <span class="testimonial-customer">Omar F. — Abu Dhabi</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"البساط وصل في حالة ممتازة والجودة رائعة جداً. سأطلب قطعة ثانية قريباً بالتأكيد."</p>
+        <span class="testimonial-customer">فاطمة ع. — الكويت</span>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-quote">"Bought 3 carpets now. Every single one is a masterpiece. MaisonTapis has a customer for life."</p>
+        <span class="testimonial-customer">James T. — London</span>
+      </div>
+    </div>
+  </div>
+  <div class="testimonial-nav">
+    <button class="testimonial-prev" aria-label="Previous">&#8592;</button>
+    <button class="testimonial-next" aria-label="Next">&#8594;</button>
+  </div>
+</section>
+
 <!-- CTA BANNER -->
-<section style="background:var(--charcoal);padding:4rem clamp(1.5rem,5vw,4rem);text-align:center">
+<section class="anim-fadein" style="background:var(--charcoal);padding:5rem clamp(1.5rem,5vw,4rem);text-align:center">
   <div class="gold-divider" style="margin-bottom:1.5rem"></div>
   <h2 style="color:var(--white);font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:1rem">Start Your Collection Today</h2>
   <p style="color:rgba(255,255,255,0.6);margin-bottom:2rem;max-width:500px;margin-left:auto;margin-right:auto">Reach us on WhatsApp for personal assistance, custom quotes, and exclusive offers.</p>
@@ -97,14 +281,25 @@
 
 <footer id="footer" class="footer"></footer>
 
-<a id="whatsapp-float" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+<a id="whatsapp-float" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp" data-tooltip="Chat with us!">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
+<button id="back-to-top" aria-label="Back to top">&#8679;</button>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" role="dialog" aria-label="Cookie notice">
+  <p>We use cookies to improve your experience and show you relevant content. <a href="#">Learn more</a></p>
+  <button id="cookie-accept">Accept &amp; Continue</button>
+</div>
+
 <script type="module">
 import { initShared, fetchProducts, buildProductCard, waFloatUrl } from '/src/app.js';
+import { initPromoSlider, initTestimonialCarousel, initCounters, initParallax, initScrollAnimations } from '/src/animations.js';
+
 initShared('home');
 document.getElementById('cta-wa-btn').href = waFloatUrl();
+
 async function loadFeatured() {
   const products = await fetchProducts();
   const featured = products.filter(p => p.featured && p.visible).slice(0, 4);
@@ -115,7 +310,21 @@ async function loadFeatured() {
   }
   grid.innerHTML = featured.map(p => buildProductCard(p)).join('');
 }
+
 loadFeatured();
+initPromoSlider();
+initTestimonialCarousel();
+initCounters();
+initParallax();
+initScrollAnimations();
+
+// Category grid: apply style filter from URL on catalog
+document.querySelectorAll('.category-card').forEach(card => {
+  card.addEventListener('click', e => {
+    const href = card.getAttribute('href');
+    if (href) window.location.href = href;
+  });
+});
 </script>
 </body>
 </html>

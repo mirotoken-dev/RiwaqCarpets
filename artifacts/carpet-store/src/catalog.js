@@ -24,7 +24,21 @@ async function init() {
   buildSizeOptions();
   buildMaterialOptions();
   bindFilters();
-  renderProducts(allProducts.filter(p => p.visible));
+
+  // Read URL params (e.g. ?style=Classic from category grid)
+  const urlParams = new URLSearchParams(window.location.search);
+  const styleParam = urlParams.get('style');
+  const styleFilter = document.getElementById('style-filter');
+  if (styleParam && styleFilter) {
+    const match = [...styleFilter.options].find(o => o.value.toLowerCase() === styleParam.toLowerCase());
+    if (match) {
+      styleFilter.value = match.value;
+      currentFilters.style = match.value;
+    }
+  }
+
+  const filtered = applyFiltersInternal(allProducts.filter(p => p.visible));
+  renderProducts(filtered, allProducts.filter(p => p.visible).length);
 }
 
 function buildColorFilters() {
@@ -103,9 +117,8 @@ function bindFilters() {
   });
 }
 
-function applyFilters() {
-  const visible = allProducts.filter(p => p.visible);
-  const filtered = visible.filter(p => {
+function applyFiltersInternal(visible) {
+  return visible.filter(p => {
     const lang = LangSystem.current;
     const name = lang === 'ar' ? p.nameAr : p.nameEn;
     const searchMatch = !currentFilters.search ||
@@ -119,7 +132,18 @@ function applyFilters() {
     const colorMatch = selectedColors.size === 0 || selectedColors.has(p.color);
     return searchMatch && sizeMatch && styleMatch && materialMatch && colorMatch;
   });
-  renderProducts(filtered, visible.length);
+}
+
+function applyFilters() {
+  const grid = document.getElementById('catalog-grid');
+  if (grid) grid.classList.add('fading');
+
+  setTimeout(() => {
+    const visible = allProducts.filter(p => p.visible);
+    const filtered = applyFiltersInternal(visible);
+    renderProducts(filtered, visible.length);
+    if (grid) grid.classList.remove('fading');
+  }, 200);
 }
 
 function renderProducts(products, total) {
@@ -145,6 +169,18 @@ function renderProducts(products, total) {
   }
 
   grid.innerHTML = products.map(p => buildProductCard(p)).join('');
+
+  // Staggered entrance animation
+  const cards = grid.querySelectorAll('.product-card');
+  cards.forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = `opacity 0.4s ease ${i * 0.07}s, transform 0.4s ease ${i * 0.07}s`;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }));
+  });
 }
 
 init();

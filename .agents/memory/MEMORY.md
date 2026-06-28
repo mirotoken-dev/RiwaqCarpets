@@ -1,0 +1,1 @@
+- [MaisonTapis architecture](maisontapis-arch.md) — Vite MPA, pure HTML/CSS/JS, key files and conventions for the luxury carpet store

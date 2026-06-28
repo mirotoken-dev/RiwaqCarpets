@@ -1,14 +1,13 @@
 import { LangSystem } from './lang.js';
 import { Wishlist } from './wishlist.js';
 import { open as openLightbox } from './lightbox.js';
+import { initNavbarScroll, initScrollAnimations, initCookieBanner, initBackToTop } from './animations.js';
 
-// ── WhatsApp number (change this one value to update everywhere) ──
 const WA_NUMBER = '201000000000';
 const PROMO_CODE = 'SAVE10';
 
 export { WA_NUMBER, PROMO_CODE };
 
-// ── WhatsApp helpers ──
 export function waFloatUrl() {
   const msg = LangSystem.t('wa_float_msg');
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -20,10 +19,8 @@ export function waProductUrl(product, selectedSize) {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
-// ── Shared navbar / footer builder ──
 export function buildNavbar(activePage) {
   const lang = LangSystem.current;
-
   const nav = document.getElementById('navbar');
   if (!nav) return;
 
@@ -62,7 +59,6 @@ export function buildNavbar(activePage) {
     </div>
   `;
 
-  // Mobile nav
   const mobileNav = document.getElementById('mobile-nav');
   if (mobileNav) {
     mobileNav.innerHTML = `
@@ -79,7 +75,6 @@ export function buildNavbar(activePage) {
     `;
   }
 
-  // Hamburger toggle
   const hamburger = document.getElementById('hamburger');
   if (hamburger && mobileNav) {
     hamburger.addEventListener('click', () => {
@@ -88,7 +83,6 @@ export function buildNavbar(activePage) {
     });
   }
 
-  // Re-bind lang after building
   LangSystem.bindButtons();
   LangSystem.apply(LangSystem.current);
 }
@@ -104,6 +98,18 @@ export function buildFooter() {
           Maison<span style="color:var(--gold)">Tapis</span>
         </div>
         <p data-lang-key="footer_brand_desc">Purveyors of the world's finest handcrafted carpets since 1985. Each piece is a unique work of art.</p>
+        <div class="footer-newsletter">
+          <span class="nl-label">Newsletter</span>
+          <div class="nl-form">
+            <input class="nl-input" type="email" placeholder="your@email.com" aria-label="Email for newsletter" />
+            <button class="nl-btn" onclick="this.textContent='✓';this.disabled=true" aria-label="Subscribe">Subscribe</button>
+          </div>
+        </div>
+        <div class="footer-payment">
+          <span class="pay-badge">Visa</span>
+          <span class="pay-badge">Mastercard</span>
+          <span class="pay-badge">PayPal</span>
+        </div>
       </div>
       <div>
         <h4 data-lang-key="footer_shop">Shop</h4>
@@ -134,13 +140,13 @@ export function buildFooter() {
     <div class="footer-bottom">
       <span>© ${new Date().getFullYear()} MaisonTapis. <span data-lang-key="footer_copyright">All rights reserved.</span></span>
       <div class="social-links">
-        <a href="#" aria-label="Instagram">
+        <a href="#" aria-label="Instagram" class="instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
         </a>
-        <a href="#" aria-label="Facebook">
+        <a href="#" aria-label="Facebook" class="facebook">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
-        <a href="#" aria-label="Pinterest">
+        <a href="#" aria-label="Pinterest" class="pinterest">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 01.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         </a>
       </div>
@@ -153,14 +159,15 @@ export function buildWhatsAppFloat() {
   if (!btn) return;
   btn.href = waFloatUrl();
   btn.setAttribute('aria-label', 'WhatsApp');
+  btn.setAttribute('data-tooltip', LangSystem.current === 'ar' ? 'تحدث معنا!' : 'Chat with us!');
 }
 
-// ── Product card builder ──
 export function buildProductCard(product) {
   const name = LangSystem.current === 'ar' ? product.nameAr : product.nameEn;
   const nameSecondary = LangSystem.current === 'ar' ? product.nameEn : product.nameAr;
   const defaultSize = product.sizes?.[0] || '';
   const isWishlisted = Wishlist.has(product.id);
+  const isLimited = product.id % 3 === 0;
 
   return `
     <div class="product-card" onclick="window.location.href='/product.html?id=${product.id}'">
@@ -174,6 +181,7 @@ export function buildProductCard(product) {
         <div class="carpet-placeholder" ${product.image ? 'style="display:none"' : ''}>🪅</div>
         <span class="card-ref">${product.ref}</span>
         ${product.featured ? `<span class="card-badge">Featured</span>` : ''}
+        <span class="card-stock-badge ${isLimited ? 'limited' : 'in-stock'}">${isLimited ? 'Limited' : 'In Stock'}</span>
         <button
           class="heart-btn ${isWishlisted ? 'active' : ''}"
           data-product-id="${product.id}"
@@ -184,6 +192,7 @@ export function buildProductCard(product) {
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
           </svg>
         </button>
+        <button class="quick-view-btn" onclick="event.stopPropagation(); window.location.href='/product.html?id=${product.id}'">Quick View</button>
       </div>
       <div class="card-body">
         <div class="card-meta">
@@ -206,15 +215,19 @@ export function buildProductCard(product) {
   `;
 }
 
-// ── Global wishlist toggle handler (called from card buttons) ──
 window.__toggleWishlist = function(id, btn) {
   const added = Wishlist.toggle(id);
   const svg = btn.querySelector('svg');
   btn.classList.toggle('active', added);
   if (svg) svg.setAttribute('fill', added ? 'currentColor' : 'none');
 
-  // Update navbar count badge
-  const badge = document.querySelector('.nav-wishlist-btn .wishlist-count');
+  if (added) {
+    btn.classList.remove('popping');
+    void btn.offsetWidth;
+    btn.classList.add('popping');
+    btn.addEventListener('animationend', () => btn.classList.remove('popping'), { once: true });
+  }
+
   const navBtn = document.querySelector('.nav-wishlist-btn');
   const count = Wishlist.count();
   if (navBtn) {
@@ -234,12 +247,10 @@ window.__toggleWishlist = function(id, btn) {
   }
 };
 
-// ── Fetch products ──
 export async function fetchProducts() {
   const cached = sessionStorage.getItem('products_cache');
   if (cached) return JSON.parse(cached);
 
-  // Check localStorage overrides (from admin)
   const adminData = localStorage.getItem('carpet_products');
   if (adminData) {
     const products = JSON.parse(adminData);
@@ -258,11 +269,14 @@ export async function fetchProducts() {
   }
 }
 
-// ── Init shared elements ──
 export function initShared(activePage) {
   LangSystem.init();
   buildNavbar(activePage);
   buildFooter();
   buildWhatsAppFloat();
   LangSystem.apply(LangSystem.current);
+  initNavbarScroll();
+  initScrollAnimations();
+  initCookieBanner();
+  initBackToTop();
 }
