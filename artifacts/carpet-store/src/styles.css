@@ -935,3 +935,68 @@ body[dir="rtl"] .products-table th { text-align: right; }
 /* Loading skeleton */
 .skeleton { background: linear-gradient(90deg, #f0ece4 0%, #e8e0d0 50%, #f0ece4 100%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: var(--radius); }
 @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ── LIGHTBOX ── */
+#lightbox-overlay {
+  position: fixed; inset: 0; z-index: 99999;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+#lightbox-overlay.lb-visible { opacity: 1; pointer-events: all; }
+
+.lb-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(4px);
+}
+
+.lb-container {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center;
+  max-width: 92vw; max-height: 92vh;
+  gap: 0.75rem;
+}
+
+.lb-close {
+  position: absolute; top: -2.75rem; right: 0;
+  width: 2.25rem; height: 2.25rem;
+  background: rgba(255,255,255,0.12); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; transition: background 0.2s;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.lb-close:hover { background: rgba(255,255,255,0.22); }
+.lb-close svg { width: 18px; height: 18px; }
+
+.lb-img-wrap {
+  max-width: 88vw; max-height: 82vh;
+  overflow: hidden; border-radius: 4px;
+  opacity: 0; transform: scale(0.96);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex; align-items: center; justify-content: center;
+  background: #111;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+}
+.lb-img-wrap.lb-loaded { opacity: 1; transform: scale(1); }
+
+.lb-img {
+  max-width: 88vw; max-height: 82vh;
+  object-fit: contain; display: block;
+}
+
+.lb-caption {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.78rem; letter-spacing: 0.06em;
+  text-align: center; max-width: 80vw;
+}
+
+/* Make clickable images show a zoom cursor */
+.card-img-wrap img.lb-trigger,
+.product-image-wrap img.lb-trigger {
+  cursor: zoom-in;
+}
+.product-image-wrap img.lb-trigger {
+  transition: opacity 0.2s;
+}
+.product-image-wrap img.lb-trigger:hover { opacity: 0.88; }

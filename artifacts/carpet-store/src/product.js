@@ -1,5 +1,6 @@
 import { initShared, fetchProducts, buildProductCard, WA_NUMBER, PROMO_CODE } from './app.js';
 import { LangSystem } from './lang.js';
+import { open as openLightbox } from './lightbox.js';
 
 initShared('catalog');
 
@@ -49,7 +50,9 @@ async function init() {
     <div class="product-layout">
       <div class="product-image-wrap">
         ${product.image
-          ? `<img id="main-img" src="${product.image}" alt="${name}" onerror="this.style.display='none';document.getElementById('img-placeholder').style.display='flex'">`
+          ? `<img id="main-img" src="${product.image}" alt="${name}" class="lb-trigger"
+               onclick="window.__openLightbox('${product.image}', '${name.replace(/'/g, "\\'")}');"
+               onerror="this.style.display='none';document.getElementById('img-placeholder').style.display='flex'">`
           : ''
         }
         <div id="img-placeholder" class="product-image-placeholder" ${product.image ? 'style="display:none"' : ''}>🪅</div>

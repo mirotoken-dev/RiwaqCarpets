@@ -1,5 +1,6 @@
 import { LangSystem } from './lang.js';
 import { Wishlist } from './wishlist.js';
+import { open as openLightbox } from './lightbox.js';
 
 // ── WhatsApp number (change this one value to update everywhere) ──
 const WA_NUMBER = '201000000000';
@@ -165,7 +166,9 @@ export function buildProductCard(product) {
     <div class="product-card" onclick="window.location.href='/product.html?id=${product.id}'">
       <div class="card-img-wrap">
         ${product.image
-          ? `<img src="${product.image}" alt="${name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          ? `<img src="${product.image}" alt="${name}" loading="lazy" class="lb-trigger"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+               onclick="event.stopPropagation(); window.__openLightbox('${product.image}', '${name.replace(/'/g, "\\'")}');">`
           : ''
         }
         <div class="carpet-placeholder" ${product.image ? 'style="display:none"' : ''}>🪅</div>
