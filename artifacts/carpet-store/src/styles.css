@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Aref+Ruqaa:wght@400;700&display=swap');
 
 :root {
   --cream: #FAF7F2;
@@ -212,10 +212,10 @@ body[dir="rtl"] .mobile-nav .nav-links, body[dir="rtl"] .mobile-nav { align-item
 .hero h1 span { color: var(--gold); }
 
 .hero-subtitle-ar {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-family: 'Aref Ruqaa', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
   color: var(--gold-light); margin-bottom: 1.5rem;
-  font-style: italic;
+  direction: rtl;
 }
 
 .hero-sub {

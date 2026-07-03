@@ -14,7 +14,7 @@ const translations = {
     // Hero
     hero_badge: "Premium Carpet Collection",
     hero_title: "The Art of Luxury Underfoot",
-    hero_subtitle_ar: "السجاد الفاخر بأيدٍ ماهرة",
+    hero_subtitle_ar: "كل تفصيلة تروى رواية",
     hero_sub: "Discover handcrafted carpets that transform spaces into timeless expressions of elegance",
     hero_cta: "Explore Collection",
 
@@ -158,7 +158,7 @@ const translations = {
 
     hero_badge: "مجموعة السجاد الفاخر",
     hero_title: "فن الفخامة تحت أقدامكم",
-    hero_subtitle_ar: "The Art of Luxury Underfoot",
+    hero_subtitle_ar: "كل تفصيلة تروى رواية",
     hero_sub: "اكتشف السجاد المنسوج يدويًا الذي يحوّل الأماكن إلى تعبيرات راقية خارج الزمن",
     hero_cta: "استعرض المجموعة",
 
