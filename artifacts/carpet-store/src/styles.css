@@ -222,7 +222,6 @@ body[dir="rtl"] .mobile-nav .nav-links, body[dir="rtl"] .mobile-nav { align-item
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: rgba(255,255,255,0.8); margin-bottom: 2.5rem;
   max-width: 560px; margin-left: auto; margin-right: auto;
-  font-family: 'Aref Ruqaa', serif;
 }
 
 .btn-primary {
